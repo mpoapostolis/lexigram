@@ -6,6 +6,7 @@ const lexigram = ["εβδομάδα", "έτος", "σήμερα", "αύριο", 
 
 function Lexigram() {
   const [lexigram, setLexigram] = useState<string[]>([]);
+  const [count, setCount] = useState(0);
   useEffect(() => {
     axios.get("/api/getWords").then((d) => setLexigram(d.data));
   }, []);
@@ -22,14 +23,35 @@ function Lexigram() {
   const max = Math.max(...arr?.map((e) => e.length));
   const [wordd, setWord] = useState<string[]>([]);
   const [correct, setCorrect] = useState<Record<string, boolean>>({});
+  const [history, setHistory] = useState<
+    {
+      correct: boolean;
+      word: string;
+    }[]
+  >([]);
+
   return (
     <div className="select-none  h-screen justify-center w-screen flex">
+      <div className="fixed w-60 bg-black bg-opacity-70 h-screen p-5 right-0">
+        <h1 className="text-gray-300  text-xl font-bold">History</h1>
+        <h5 className="text-gray-300  text-xs mt-2 ">
+          💻 Typed : {count} times
+        </h5>
+        <hr className="mb-5 mt-2 opacity-50" />
+        <ul>
+          {history.map((m, idx) => (
+            <li className="mb-2 text-gray-300 font-black text-xs" key={idx}>
+              {m.correct ? "✅" : "❌"} &nbsp; {m.word}
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="p-10 max-w-2xl w-full shadow-inner  border flex flex-col h-full ">
         <div className="grid mt-10 grid-cols-2 gap-4">
           {Array.from(groups)
             .sort((a, b) => a - b)
-            .map((c) => (
-              <div className="flex flex-col">
+            .map((c, idx) => (
+              <div key={idx} className="flex flex-col">
                 <label className="text-xs font-bold mb-2">{c} letters</label>
                 <div>
                   {normalizeLexi
@@ -79,11 +101,14 @@ function Lexigram() {
         <br />{" "}
         <Keyboard
           onKeyPress={(e) => {
+            setCount((s) => s + 1);
             if (!wordd) return;
             if (e === "Enter") {
               const word = wordd.join("");
-              if (normalizeLexi?.includes(word)) {
-                setWord([]);
+              const correct = normalizeLexi?.includes(word);
+              setHistory((h) => [...h, { correct, word }]);
+              setWord([]);
+              if (correct) {
                 setCorrect((s) => ({ ...s, [word]: true }));
               }
               return;

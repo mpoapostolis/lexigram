@@ -33,7 +33,7 @@ function Keyboard(props: { onKeyPress: (k: string) => void }) {
   useEffect(() => {
     if ((key && key.length === 1) || key === "Enter" || key === "Backspace")
       props.onKeyPress(key);
-  }, [key]);
+  }, [key, props]);
 
   return (
     <div className={clsx("w-full text-white font-black text-base")}>
