@@ -67,7 +67,7 @@ function Lexigram() {
                               className={clsx(
                                 "shadow text-gray-700 shadow-gray-500 bg-black bg-opacity-5  w-6  h-6 font-bold text-xs rounded-sm mr-1 flex items-center justify-center text-center ",
                                 {
-                                  "bg-gray-800  bg-opacity-80": isCorrect,
+                                  "bg-green-400  bg-opacity-20": isCorrect,
                                 }
                               )}
                             >
@@ -107,8 +107,8 @@ function Lexigram() {
               const word = wordd.join("");
               const correct = normalizeLexi?.includes(word);
               setHistory((h) => [...h, { correct, word }]);
-              setWord([]);
               if (correct) {
+                setWord([]);
                 setCorrect((s) => ({ ...s, [word]: true }));
               }
               return;

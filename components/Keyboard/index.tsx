@@ -8,7 +8,7 @@ function Key(
     pressed: boolean;
   } & DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 ) {
-  const { children, ...rest } = props;
+  const { children, special, pressed, ...rest } = props;
 
   return (
     <button
@@ -17,8 +17,8 @@ function Key(
           rounded-xl hover:scale-90 uppercase w-full p-3 font-black 
           text-gray-700`,
         {
-          "bg-black bg-opacity-20 scale-90": props.pressed,
-          "text-xs font-semibold": props.special,
+          "bg-black bg-opacity-20 scale-90": pressed,
+          "text-xs font-semibold": special,
         }
       )}
       {...rest}
@@ -33,7 +33,7 @@ function Keyboard(props: { onKeyPress: (k: string) => void }) {
   useEffect(() => {
     if ((key && key.length === 1) || key === "Enter" || key === "Backspace")
       props.onKeyPress(key);
-  }, [key, props]);
+  }, [key]);
 
   return (
     <div className={clsx("w-full text-white font-black text-base")}>
