@@ -11,7 +11,7 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const response = await fetch("http://localhost:3000/words.json")
+  const response = await fetch("https://lexigram.vercel.app/words.json")
   const json = await response.json()
   const d = new Date()
 
