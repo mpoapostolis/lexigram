@@ -32,7 +32,7 @@ function Lexigram() {
 
   return (
     <div className="select-none  h-screen justify-center w-screen flex">
-      <div className="fixed w-60 bg-black bg-opacity-70 h-screen p-5 right-0">
+      <div className="hidden md:block fixed w-60 bg-black bg-opacity-70 h-screen p-5 right-0">
         <h1 className="text-gray-300  text-xl font-bold">History</h1>
         <h5 className="text-gray-300  text-xs mt-2 ">
           💻 Typed : {count} times
@@ -91,7 +91,7 @@ function Lexigram() {
             <div
               key={idx}
               className={`shadow shadow-gray-500 bg-black bg-opacity-5 
-              rounded-xl hover:scale-90 uppercase h-12 w-12 p-3 font-black  text-center
+              rounded-xl hover:scale-90 uppercase md:h-12 md:w-12 md:p-3 w-8 h-8 p-2 text-xs md:text-base font-black  text-center
               text-gray-700`}
             >
               {char.toUpperCase()}
