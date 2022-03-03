@@ -14,7 +14,7 @@ function Key(
     <button
       className={clsx(
         `border-gray-700 shadow shadow-gray-500 bg-black bg-opacity-5 
-          rounded hover:scale-90 text-xs md:text-xs p-2 uppercase w-full md:p-3 font-black 
+          rounded hover:scale-90 text-xs md:text-xs p-3 uppercase w-full md:p-3 font-black 
           text-gray-700`,
         {
           "bg-black bg-opacity-20 scale-90": pressed,
@@ -36,7 +36,7 @@ function Keyboard(props: { onKeyPress: (k: string) => void }) {
   }, [key]);
 
   return (
-    <div className={clsx("w-full text-white font-black text-base")}>
+    <div className={clsx("w-full  text-white font-black text-base")}>
       <div className="flex justify-center  gap-1 my-1 w-full">
         {["ς", "ε", "ρ", "τ", "υ", "θ", "ι", "ο", "π", "Backspace"].map((k) => (
           <Key
