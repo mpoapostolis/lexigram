@@ -45,7 +45,16 @@ function Keyboard(props: { onKeyPress: (k: string) => void }) {
             pressed={k === key && keyPressed}
             key={k}
           >
-            {k}
+            {k === "Backspace" ? (
+              <div className="flex justify-center w-full">
+                <img
+                  className="h-5 w-5"
+                  src="https://s2.svgbox.net/materialui.svg?ic=backspace&color=555"
+                />
+              </div>
+            ) : (
+              k
+            )}
           </Key>
         ))}
       </div>
