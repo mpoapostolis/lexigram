@@ -23,7 +23,7 @@ export default async function handler(
     if (idx > 6) num++
     if (idx > 8) num++
     const tmp = simple_random(+seed + idx)
-    const random = Math.ceil(tmp * json[num].length)
+    const random = Math.floor(tmp * json[num].length)
     return json[num][random]
   })
 

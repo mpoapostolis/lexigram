@@ -53,8 +53,6 @@ function Lexigram() {
     [found]
   );
 
-  console.log(foundTotalLetter);
-
   return (
     <div className="select-none  h-screen justify-center w-screen flex">
       <div className="p-10 max-w-2xl w-full shadow-inner  border flex flex-col h-full ">
