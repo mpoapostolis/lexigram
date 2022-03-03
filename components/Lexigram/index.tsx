@@ -1,12 +1,13 @@
 import axios from "axios";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Keyboard from "../Keyboard";
-const lexigram = ["εβδομάδα", "έτος", "σήμερα", "αύριο", "χθες", "ημερολόγιο"];
 
 function Lexigram() {
   const [lexigram, setLexigram] = useState<string[]>([]);
   const [count, setCount] = useState(0);
+  const [found, setFound] = useState<Record<string, boolean>>({});
+
   useEffect(() => {
     axios.get("/api/getWords").then((d) => setLexigram(d.data));
   }, []);
@@ -30,6 +31,30 @@ function Lexigram() {
     }[]
   >([]);
 
+  const howManyLetter = useMemo(
+    () =>
+      lexigram
+        .map((e) => e.length)
+        .reduce((acc, curr) => {
+          // @ts-ignore
+          return { ...acc, [curr]: !isNaN(acc[curr]) ? acc[curr] + 1 : 1 };
+        }, {}),
+    [lexigram]
+  );
+
+  const foundTotalLetter = useMemo(
+    () =>
+      Object.keys(found)
+        .map((e) => e.length)
+        .reduce((acc, curr) => {
+          // @ts-ignore
+          return { ...acc, [curr]: !isNaN(acc[curr]) ? acc[curr] + 1 : 1 };
+        }, {}),
+    [found]
+  );
+
+  console.log(foundTotalLetter);
+
   return (
     <div className="select-none  h-screen justify-center w-screen flex">
       <div className="p-10 max-w-2xl w-full shadow-inner  border flex flex-col h-full ">
@@ -38,13 +63,25 @@ function Lexigram() {
             .sort((a, b) => a - b)
             .map((c, idx) => (
               <div key={idx} className="flex flex-col">
-                <label className="text-xs font-bold mb-2">{c} letters</label>
+                <label
+                  className={clsx("text-xs font-bold mb-2", {
+                    // @ts-ignore
+                    "opacity-20": howManyLetter[c] === foundTotalLetter[c],
+                  })}
+                >
+                  {c} letters
+                </label>
                 <div>
                   {normalizeLexi
                     .filter((e) => e.length === c)
 
                     .map((word) => (
-                      <div key={word} className="flex mb-1">
+                      <div
+                        key={word}
+                        className={clsx("flex mb-1", {
+                          "opacity-30": found[word],
+                        })}
+                      >
                         {word.split("").map((e, idx) => {
                           let isCorrect1 = false;
                           history.map((h) => {
@@ -122,9 +159,10 @@ function Lexigram() {
               if (wordd.length === 0) return;
               const word = wordd.join("");
               const correct = normalizeLexi?.includes(word);
-              setHistory((h) => [...h, { correct, word }]);
+              setHistory((h) => [{ correct, word }, ...h]);
+              setWord([]);
               if (correct && wordd.length > 0) {
-                setWord([]);
+                setFound((s) => ({ ...s, [word]: true }));
                 setCorrect((s) => ({ ...s, [word]: true }));
               }
               return;
