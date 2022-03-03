@@ -84,14 +84,14 @@ function Lexigram() {
         <div className="mt-auto" />
         <div
           className={clsx(
-            "flex h-16 items-center mt-10 justify-center shadow-inner border-b p-3 gap-x-3 rounded-xl w-full"
+            "flex md:h-16 h-12 items-center mt-10 justify-center shadow-inner border-b p-3 gap-x-3 rounded-xl w-full"
           )}
         >
           {wordd.map((char, idx) => (
             <div
               key={idx}
               className={`shadow shadow-gray-500 bg-black bg-opacity-5 
-              rounded-xl hover:scale-90 uppercase md:h-12 md:w-12 md:p-3 w-8 h-8 p-2 text-xs md:text-base font-black  text-center
+              rounded hover:scale-90 uppercase md:h-12 md:w-12 md:p-3 w-8 h-8 p-2 text-xs md:text-base font-black  text-center
               text-gray-700`}
             >
               {char.toUpperCase()}

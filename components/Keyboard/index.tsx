@@ -14,7 +14,7 @@ function Key(
     <button
       className={clsx(
         `border-gray-700 shadow shadow-gray-500 bg-black bg-opacity-5 
-          rounded-xl hover:scale-90 text-xs md:text-base p-2 uppercase w-full md:p-3 font-black 
+          rounded hover:scale-90 text-xs md:text-xs p-2 uppercase w-full md:p-3 font-black 
           text-gray-700`,
         {
           "bg-black bg-opacity-20 scale-90": pressed,
