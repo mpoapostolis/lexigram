@@ -69,7 +69,7 @@ function Lexigram() {
                     "opacity-20": howManyLetter[c] === foundTotalLetter[c],
                   })}
                 >
-                  {c} letters
+                  {c} γράμματα
                 </label>
                 <div>
                   {normalizeLexi
@@ -113,16 +113,16 @@ function Lexigram() {
         <div className=" mb-2 ">
           <div>
             <label className="text-sm text-gray-800 font-semibold mb-2">
-              History
+              Ιστορίκο
             </label>
             <h5 className="text-gray-600  text-xs mt-1">
-              💻 Typed : {count} times
+              💻 Πληκτρολογήσες : {count} φορές
             </h5>
           </div>
           <hr className="mt-2 border-black opacity-5" />
 
           <div className="mb-5 mt-2 opacity-50" />
-          <ul className=" max-h-28 md:max-h-60 overflow-auto">
+          <ul className=" max-h-24 md:max-h-52 overflow-auto">
             {history.map((m, idx) => (
               <li
                 className="mb-2 flex  text-gray-700 font-black text-xs"
